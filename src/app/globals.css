@@ -1,0 +1,74 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --glass: rgba(255, 255, 255, 0.6);
+  --glass-dark: rgba(17, 25, 40, 0.75);
+}
+
+body {
+  background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 30%, #ecfdf5 60%, #f8fafc 100%);
+  min-height: 100vh;
+  font-family: 'Cairo', sans-serif;
+}
+
+.dark body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 24px;
+}
+
+.dark .glass {
+  background: var(--glass-dark);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.card {
+  background: white;
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+}
+
+.dark .card {
+  background: #1e293b;
+}
+
+.progress-bar {
+  height: 10px;
+  background: #e2e8f0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.dark .progress-bar {
+  background: #334155;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #3b82f6, #60a5fa);
+  transition: width 1s ease;
+}
+
+@keyframes rotating {
+  from {
+    transform: perspective(1000px) rotateX(-15deg) rotateY(0deg);
+  }
+  to {
+    transform: perspective(1000px) rotateX(-15deg) rotateY(360deg);
+  }
+}
+
+/* RTL Support */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+  }
