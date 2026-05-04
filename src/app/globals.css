@@ -17,24 +17,380 @@ body {
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
 }
 
-.glass {
-  background: var(--glass);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  border-radius: 24px;
+/* ===== 2. Floating Label Input (Maximinodotpy) ===== */
+.inputGroup {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 1em 0;
+  position: relative;
+  width: 100%;
+}
+.inputGroup input, .inputGroup textarea {
+  font-size: 100%;
+  padding: 0.8em;
+  outline: none;
+  border: 2px solid rgb(200, 200, 200);
+  background-color: transparent;
+  border-radius: 20px;
+  width: 100%;
+}
+.inputGroup label {
+  font-size: 100%;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0.8em;
+  margin-right: 0.5em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  color: rgb(100, 100, 100);
+}
+.inputGroup :is(input:focus, input:valid, textarea:focus, textarea:valid) ~ label {
+  transform: translateY(-50%) scale(.9);
+  margin: 0em;
+  margin-right: 1.3em;
+  padding: 0.4em;
+  background-color: #e8e8e8;
+  border-radius: 8px;
+}
+.inputGroup :is(input:focus, input:valid, textarea:focus, textarea:valid) {
+  border-color: #3b82f6;
 }
 
-.dark .glass {
-  background: var(--glass-dark);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+/* ===== 3. Hover Cards (kamehame-ha) ===== */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.cards .card-hover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  height: auto;
+  min-height: 100px;
+  width: 100%;
+  border-radius: 20px;
+  color: white;
+  cursor: pointer;
+  transition: 400ms;
+  padding: 20px;
+}
+.cards .card-hover.red { background-color: #f43f5e; }
+.cards .card-hover.yellow { background-color: #f59e0b; }
+.cards .card-hover.green { background-color: #22c55e; }
+.cards .card-hover p.tip { font-size: 1.2em; font-weight: 700; }
+.cards .card-hover p.second-text { font-size: .9em; }
+.cards .card-hover:hover { transform: scale(1.05); }
+.cards:hover > .card-hover:not(:hover) {
+  filter: blur(5px);
+  transform: scale(0.95);
 }
 
-.card {
+/* ===== 5. Sparkle Button (Spacious74) ===== */
+.sparkle-btn {
+  padding: 14px 28px;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  position: relative;
+  background: linear-gradient(90deg, #5bfcc4, #3b82f6, #8b5cf6);
+  border-radius: 16px;
+  color: #fff;
+  transition: all 0.3s ease;
+  box-shadow: inset 0px 0px 5px #ffffffa9, inset 0px 35px 30px rgba(0,0,0,0.3), 0px 5px 10px #000000cc;
+  text-shadow: 1px 1px 1px #000;
+  font-weight: bold;
+}
+.sparkle-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 16px;
+  filter: blur(0);
+  z-index: -1;
+  box-shadow: none;
+  background: conic-gradient(#00000000 80deg, #40baf7, #8b5cf6, #5bfcc4, #00000000 280deg);
+  transition: all 0.3s ease;
+}
+.sparkle-btn:hover::before { filter: blur(15px); }
+.sparkle-btn:active { transform: translateY(2px); }
+
+/* ===== Light/Dark Mode Toggle (satyamchaudharydev) ===== */
+.switch {
+  display: inline-block;
+  --width-of-switch: 3.5em;
+  --height-of-switch: 2em;
+  --size-of-icon: 1.4em;
+  --slider-offset: 0.3em;
+  position: relative;
+  width: var(--width-of-switch);
+  height: var(--height-of-switch);
+}
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #f4f4f5;
+  transition: .4s;
+  border-radius: 30px;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: var(--size-of-icon);
+  width: var(--size-of-icon);
+  border-radius: 20px;
+  left: var(--slider-offset);
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(40deg, #ff0080, #ff8c00 70%);
+  transition: .4s;
+}
+input:checked + .slider { background-color: #303136; }
+input:checked + .slider:before {
+  left: calc(100% - (var(--size-of-icon) + var(--slider-offset)));
+  background: #303136;
+  box-shadow: inset -3px -2px 5px -2px #8983f7, inset -10px -4px 0 0 #a3dafb;
+}
+
+/* ===== 3D Carousel (ilkhoeri) ===== */
+.wrapper {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.inner {
+  --w: 100px;
+  --h: 130px;
+  --translateZ: calc((var(--w) + var(--h)) + 0px);
+  --rotateX: -15deg;
+  --perspective: 1000px;
+  position: absolute;
+  width: var(--w);
+  height: var(--h);
+  top: 25%;
+  left: calc(50% - (var(--w) / 2));
+  z-index: 2;
+  transform-style: preserve-3d;
+  transform: perspective(var(--perspective));
+  animation: rotating 25s linear infinite;
+}
+@keyframes rotating {
+  from { transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(0); }
+  to { transform: perspective(var(--perspective)) rotateX(var(--rotateX)) rotateY(1turn); }
+}
+.carousel-card {
+  position: absolute;
+  border: 2px solid rgba(59, 130, 246, 0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  inset: 0;
+  transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+  background: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+}
+.dark .carousel-card {
+  background: rgba(30, 41, 59, 0.9);
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+/* ===== Comment Section (zanina-yassine) ===== */
+.comment-card {
+  width: 100%;
+  background-color: white;
+  box-shadow: 0px 12px 26px rgba(0, 0, 0, 0.1);
+  border-radius: 17px 17px 27px 27px;
+  padding: 20px;
+}
+.dark .comment-card { background-color: #1e293b; }
+.comment-title {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+  border-bottom: 1px solid #e2e8f0;
+  font-weight: 700;
+  font-size: 14px;
+  color: #47484b;
+}
+.text-box {
+  width: 100%;
+  background-color: #f1f5f9;
+  padding: 10px;
+  border-radius: 12px;
+}
+.dark .text-box { background-color: #334155; }
+.text-box textarea {
+  width: 100%;
+  height: 50px;
+  resize: none;
+  border: 0;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 13px;
+  outline: none;
+  font-family: 'Cairo', sans-serif;
+}
+.send-btn {
+  width: 36px;
+  height: 36px;
+  background-color: #3b82f6;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.2s;
+}
+.send-btn:hover { background-color: #2563eb; transform: scale(1.05); }
+
+/* ===== Sign In Card (Smit-Prajapati) ===== */
+.auth-container {
+  max-width: 400px;
+  background: #F8F9FD;
+  background: linear-gradient(0deg, rgb(255, 255, 255) 0%, rgb(244, 247, 251) 100%);
+  border-radius: 40px;
+  padding: 30px;
+  border: 5px solid rgb(255, 255, 255);
+  box-shadow: rgba(133, 189, 215, 0.88) 0px 30px 30px -20px;
+}
+.dark .auth-container {
+  background: linear-gradient(0deg, #1e293b 0%, #0f172a 100%);
+  border-color: #334155;
+}
+.auth-heading {
+  text-align: center;
+  font-weight: 900;
+  font-size: 28px;
+  color: rgb(16, 137, 211);
+}
+.auth-input {
+  width: 100%;
   background: white;
-  border-radius: 24px;
-  padding: 24px;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+  border: none;
+  padding: 15px 20px;
+  border-radius: 20px;
+  margin-top: 15px;
+  box-shadow: #cff0ff 0px 10px 10px -5px;
+  border-inline: 2px solid transparent;
+  outline: none;
+  font-family: 'Cairo', sans-serif;
 }
+.dark .auth-input { background: #334155; color: white; }
+.auth-input:focus { border-inline: 2px solid #12B1D1; }
+.auth-btn {
+  display: block;
+  width: 100%;
+  font-weight: bold;
+  background: linear-gradient(45deg, rgb(16, 137, 211) 0%, rgb(18, 177, 209) 100%);
+  color: white;
+  padding: 15px;
+  margin: 20px auto;
+  border-radius: 20px;
+  box-shadow: rgba(133, 189, 215, 0.88) 0px 20px 10px -15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-family: 'Cairo', sans-serif;
+}
+.auth-btn:hover { transform: scale(1.03); }
+
+/* ===== Support Dropdown (Zain-Muhammad) ===== */
+.tooltip-wrapper {
+  --clr-btn: #1e293b;
+  --clr-dropdown: #1e293b;
+  --clr-light: #ffffff;
+}
+.nav-link { position: relative; }
+.nav-link > .tooltip-tab {
+  color: var(--clr-light);
+  background: var(--clr-btn);
+  padding: 0.6rem 1rem;
+  letter-spacing: 0.5px;
+  font-size: 0.8rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid #3b82f6;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+.tooltip {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 14rem;
+  transform: translateY(10px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s;
+  padding-top: 10px;
+  z-index: 100;
+}
+.tooltip .tooltip-menu-with-icon {
+  padding: 10px 0;
+  background-color: var(--clr-dropdown);
+  border: 1px solid #3b82f6;
+  border-radius: 12px;
+}
+.tooltip-link > a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--clr-dropdown);
+  color: var(--clr-light);
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.tooltip-link > a:hover { background-color: #334155; }
+.nav-link:hover > .tooltip {
+  transform: translate(0, 0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ===== Navbar (themrsami) ===== */
+.navbar {
+  background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9));
+  backdrop-filter: blur(20px);
+  border-radius: 50px;
+  padding: 8px 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  border: 1px solid rgba(59, 130, 246, 0.1);
+}
+.dark .navbar {
+  background: linear-gradient(135deg, rgba(30,41,59,0.95), rgba(15,23,42,0.9));
+  border-color: rgba(96, 165, 250, 0.1);
+}
+
+/* RTL Support */
+[dir="rtl"] { direction: rtl; text-align: right; }
+[dir="rtl"] .inputGroup label { right: 0; left: auto; margin-right: 0.5em; margin-left: 0; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .auth-container { padding: 20px; border-radius: 30px; }
+  .sparkle-btn { padding: 12px 20px; font-size: 1rem; }
+  }}
 
 .dark .card {
   background: #1e293b;
