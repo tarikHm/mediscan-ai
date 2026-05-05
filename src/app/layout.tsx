@@ -39,7 +39,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <div className="flex justify-center w-full p-3">
           <nav className="navbar">
             <div className="flex items-center justify-center gap-2 sm:gap-6">
-
               <div className="relative group">
                 <a href="/" className="p-2 sm:p-3 rounded-full hover:bg-blue-50 dark:hover:bg-gray-700 cursor-pointer transition-all flex items-center gap-1">
                   <span>🏠</span>
@@ -75,7 +74,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                   </li>
                 </ul>
               </div>
-
             </div>
           </nav>
         </div>
@@ -84,23 +82,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setShowAuth(false)}>
             <div className="auth-container" onClick={(e) => e.stopPropagation()}>
               <div className="auth-heading">{isLogin ? (lang === 'ar' ? 'تسجيل الدخول' : 'Sign In') : (lang === 'ar' ? 'إنشاء حساب' : 'Register')}</div>
-
               {!isLogin && (
                 <div className="flex gap-2">
                   <input className="auth-input" type="text" placeholder={lang === 'ar' ? 'الاسم' : 'First Name'} />
                   <input className="auth-input" type="text" placeholder={lang === 'ar' ? 'اللقب' : 'Last Name'} />
                 </div>
               )}
-
               <input className="auth-input" type="email" placeholder="Email" />
               <input className="auth-input" type="password" placeholder={lang === 'ar' ? 'كلمة المرور' : 'Password'} />
-
-              {!isLogin && (
-                <input className="auth-input" type="password" placeholder={lang === 'ar' ? 'تأكيد كلمة المرور' : 'Confirm Password'} />
-              )}
-
+              {!isLogin && <input className="auth-input" type="password" placeholder={lang === 'ar' ? 'تأكيد كلمة المرور' : 'Confirm Password'} />}
               <button className="auth-btn">{isLogin ? (lang === 'ar' ? 'دخول' : 'Sign In') : (lang === 'ar' ? 'تسجيل' : 'Register')}</button>
-
               <p className="text-center text-sm text-gray-500 cursor-pointer" onClick={() => setIsLogin(!isLogin)}>
                 {isLogin ? (lang === 'ar' ? 'ليس لديك حساب؟ سجل الآن' : "Don't have an account? Register") : (lang === 'ar' ? 'لديك حساب؟ سجل دخول' : 'Already have an account? Sign In')}
               </p>
@@ -113,8 +104,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <footer className="border-t border-gray-200 dark:border-gray-700 mt-20 py-8 text-center text-sm text-gray-500">
           <p>© {new Date().getFullYear()} MediScan AI. {lang === 'ar' ? 'جميع الحقوق محفوظة.' : 'All rights reserved.'}</p>
         </footer>
-
       </body>
     </html>
   )
-                          }
+                  }
