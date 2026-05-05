@@ -4,9 +4,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
-const medicalIcons = [
-  '❤️', '🧠', '🫁', '🩺', '🏥', '🔬', '🧬', '💊', '👨‍⚕️', '🩻'
-]
+const medicalIcons = ['❤️', '🧠', '🫁', '🩺', '🏥', '🔬', '🧬', '💊', '👨‍⚕️', '🩻']
 
 const emergencyWords = [
   'ألم صدر', 'صعوبة تنفس', 'نزيف', 'جلطة', 'إغماء', 'اختناق',
@@ -46,7 +44,6 @@ export default function HomePage() {
   return (
     <main className="min-h-screen relative overflow-hidden">
       
-      {/* ============ 3D Carousel (ilkhoeri) ============ */}
       <div className="absolute inset-0 z-0 opacity-15 pointer-events-none">
         <div className="wrapper">
           <div className="inner" style={{ '--quantity': '10', '--w': '110px', '--h': '140px', '--translateZ': 'calc((110px + 140px) + 0px)' } as React.CSSProperties}>
@@ -59,7 +56,6 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* ============ Text Loader (dexter-st) ============ */}
       <AnimatePresence>
         {loading && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md z-50 flex items-center justify-center">
@@ -80,7 +76,6 @@ export default function HomePage() {
 
       <div className="relative z-10 max-w-2xl mx-auto px-4 py-8">
         
-        {/* ============ Emergency Alert ============ */}
         <AnimatePresence>
           {showEmergency && (
             <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="bg-red-600 text-white rounded-3xl p-8 text-center mb-8 shadow-2xl">
@@ -95,13 +90,11 @@ export default function HomePage() {
           )}
         </AnimatePresence>
 
-        {/* ============ Title ============ */}
         <motion.div initial={{ opacity: 0, y: -30 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-8">
           <h1 className="text-5xl font-bold text-medical-600 dark:text-medical-400 mb-3">🏥 MediScan AI</h1>
           <p className="text-xl text-gray-600 dark:text-gray-400">تحليل ذكي للأعراض مع السلامة أولاً</p>
         </motion.div>
 
-        {/* ============ Steps ============ */}
         <div className="flex justify-center gap-4 mb-8">
           {[1, 2, 3].map((s) => (
             <div key={s} className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${step >= s ? 'bg-medical-500 text-white' : 'bg-gray-200 dark:bg-gray-600 text-gray-500'}`}>
@@ -110,23 +103,14 @@ export default function HomePage() {
           ))}
         </div>
 
-        {/* ============ Step 1: Symptoms (Floating Label) ============ */}
         {step === 1 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg mb-6">
             <h2 className="text-2xl font-bold mb-4">🩺 صف أعراضك بالتفصيل</h2>
             <p className="text-gray-500 dark:text-gray-400 mb-4">كلما كان الوصف أدق، كان التحليل أفضل</p>
-            
             <div className="inputGroup">
-              <textarea
-                required
-                value={symptoms}
-                onChange={(e) => handleSymptomsChange(e.target.value)}
-                className="min-h-[150px]"
-                style={{ borderRadius: '20px', width: '100%', padding: '15px', border: '2px solid #c8c8c8', outline: 'none', resize: 'vertical' }}
-              />
+              <textarea required value={symptoms} onChange={(e) => handleSymptomsChange(e.target.value)} className="min-h-[150px]" style={{ borderRadius: '20px', width: '100%', padding: '15px', border: '2px solid #c8c8c8', outline: 'none', resize: 'vertical' }} />
               <label>الأعراض</label>
             </div>
-
             {symptoms.length > 0 && symptoms.length < 30 && (
               <div className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-700 rounded-xl">
                 <p className="font-bold text-blue-800 dark:text-blue-300">💡 لمساعدتك بشكل أفضل:</p>
@@ -136,7 +120,6 @@ export default function HomePage() {
           </motion.div>
         )}
 
-        {/* ============ Step 2: Age ============ */}
         {step === 2 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg mb-6">
             <h2 className="text-2xl font-bold mb-4">👤 العمر</h2>
@@ -147,7 +130,6 @@ export default function HomePage() {
           </motion.div>
         )}
 
-        {/* ============ Step 3: Pain Level ============ */}
         {step === 3 && (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="bg-white dark:bg-gray-800 rounded-3xl p-6 shadow-lg mb-6">
             <h2 className="text-2xl font-bold mb-4">📊 مستوى الألم: {painLevel}/10</h2>
@@ -160,7 +142,6 @@ export default function HomePage() {
           </motion.div>
         )}
 
-        {/* ============ Buttons ============ */}
         <div className="flex justify-between">
           {step > 1 ? (
             <button onClick={() => setStep(step - 1)} className="px-8 py-4 bg-gray-200 dark:bg-gray-600 rounded-2xl font-bold hover:bg-gray-300 dark:hover:bg-gray-500 transition-all">← رجوع</button>
@@ -178,4 +159,4 @@ export default function HomePage() {
       </div>
     </main>
   )
-    }
+            }
